@@ -8,14 +8,9 @@ class BaseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.only(
-            top: 20,
-            bottom: 20,
-          ),
-          child: child,
-        ),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: child,
       ),
     );
   }
