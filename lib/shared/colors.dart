@@ -5,4 +5,8 @@ class AppColors {
   static const primaryColor = Color(0XFF3558CD);
   static const grey = Color(0XFF6B6B6B);
   static const grass = Color(0XFFF3F9EF);
+  static const fire = Color(0XFFFDF1F1);
+  static const water = Color(0XFFF3F9FE);
+  static const darkText = Color(0XFF161A33);
+  static const lightPurple = Color(0XFFD5DEFF);
 }
