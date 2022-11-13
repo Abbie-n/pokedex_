@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/features/home/presentation/widget/tab_header.dart';
 import 'package:pokedex/shared/shared.dart';
@@ -28,7 +29,10 @@ class HomeScreen extends StatelessWidget {
             child: CustomGridView(
               children: List.generate(
                 9,
-                (index) => const SingleItem(),
+                (index) => GestureDetector(
+                  onTap: () => context.router.push(const SingleViewScreen()),
+                  child: const SingleItem(),
+                ),
               ),
             ),
           ),
