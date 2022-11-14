@@ -79,7 +79,8 @@ class PokemonDetailsScreen extends HookConsumerWidget {
             snap: true,
             elevation: 0,
             expandedHeight: 320,
-            backgroundColor: AppColors.grass,
+            backgroundColor: Helper.getContainerColor(
+                Helper.concatenateString(pokemon.types!)),
             leading: GestureDetector(
               onTap: () async {
                 await getFavouritesCubit.call();
@@ -99,13 +100,13 @@ class PokemonDetailsScreen extends HookConsumerWidget {
                       Container(
                         height: 300,
                         padding: const EdgeInsets.fromLTRB(0, 100, 0, 14),
-                        decoration: const BoxDecoration(color: AppColors.grass),
                         alignment: Alignment.topLeft,
                         child: Column(
                           children: [
                             const Expanded(
                               child: Divider(
                                 color: AppColors.scaffoldBg,
+                                thickness: 2,
                               ),
                             ),
                             Expanded(
@@ -164,9 +165,6 @@ class PokemonDetailsScreen extends HookConsumerWidget {
                                           height: 125,
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 9),
-                                          decoration: const BoxDecoration(
-                                            color: AppColors.grass,
-                                          ),
                                           child: Image.network(
                                             pokemon.sprites!.other!
                                                 .officialArtwork!.frontDefault!,

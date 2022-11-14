@@ -31,8 +31,9 @@ class SingleItem extends StatelessWidget {
             imageBuilder: (context, imageProvider) => Container(
               height: 104,
               padding: const EdgeInsets.symmetric(horizontal: 9),
-              decoration: const BoxDecoration(
-                color: AppColors.grass,
+              decoration: BoxDecoration(
+                color: Helper.getContainerColor(
+                    Helper.concatenateString(pokemon.types!)),
               ),
               child: Image.network(
                 pokemon.sprites!.other!.officialArtwork!.frontDefault!,

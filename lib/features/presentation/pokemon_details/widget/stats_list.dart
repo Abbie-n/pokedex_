@@ -26,15 +26,18 @@ class StatsList extends StatelessWidget {
             pokemon.stats!.length,
             (index) => BaseStats(
               progress: Helper.getProgress(pokemon.stats![index].baseStat!),
-              progressColor: Colors.black,
+              progressColor: Helper.getProgressColor(
+                  Helper.getProgress(pokemon.stats![index].baseStat!)),
               stat: pokemon.stats![index].stat!.name!.capitalize,
               value: '${pokemon.stats![index].baseStat}',
             ),
           ),
         ),
         BaseStats(
-          progress: .5,
-          progressColor: Colors.black,
+          progress: Helper.getProgress(
+              double.parse(Helper.getAvgPower(pokemon.stats!))),
+          progressColor: Helper.getAvgPowerProgressColor(
+              Helper.getAvgPower(pokemon.stats!)),
           stat: 'Avg. Power',
           value: Helper.getAvgPower(pokemon.stats!),
         ),
