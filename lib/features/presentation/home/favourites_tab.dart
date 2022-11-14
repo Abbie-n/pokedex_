@@ -28,10 +28,7 @@ class FavouritesListScreen extends HookConsumerWidget {
             data.length,
             (index) => GestureDetector(
               onTap: () => context.router.push(
-                PokemonDetailsScreen(
-                  pokemon: data[index],
-                  isFave: true,
-                ),
+                PokemonDetailsScreen(pokemon: data[index]),
               ),
               child: SingleItem(pokemon: data[index]),
             ),
