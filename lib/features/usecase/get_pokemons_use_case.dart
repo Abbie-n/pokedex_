@@ -24,9 +24,11 @@ class GetPokemonsUseCase {
     }
   }
 
-  Future<Data<List<PokemonDetails>>> getPokemonsFromAPI() async {
+  Future<Data<List<PokemonDetails>>> getPokemonsFromAPI(
+      {int currentLength = 12, bool fetchMore = false}) async {
     try {
-      final result = await repository.getPokemons();
+      final result = await repository.getPokemons(
+          currentLength: currentLength, fetchMore: fetchMore);
 
       if (result == null || result.isEmpty) {
         return Data.failure(NullException());

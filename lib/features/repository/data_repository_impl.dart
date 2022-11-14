@@ -41,12 +41,17 @@ class DataRepositoryImpl implements DataRepository {
   }
 
   @override
-  Future getPokemons() async {
+  Future getPokemons({int currentLength = 12, bool fetchMore = false}) async {
     List<PokemonDetails> pokemons = [];
+    int limit = 12;
 
     try {
       // gets list of pokemons
-      final response = await apiService.get('/');
+      if (fetchMore) {
+        limit = currentLength + limit;
+      }
+
+      final response = await apiService.get('/', params: {'limit': limit});
 
       if (response == null || response.runtimeType == int) {
         return pokemons;

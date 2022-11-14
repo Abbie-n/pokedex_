@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pokedex/core/services/api/api_service.dart';
-import 'package:pokedex/core/services/api/dio_interceptor.dart';
 import 'package:pokedex/shared/extensions/connectivity_extension.dart';
 import 'package:pokedex/shared/shared.dart';
 
@@ -11,7 +10,7 @@ import 'package:pokedex/shared/shared.dart';
 class ApiServiceImpl implements ApiService {
   final Dio _dio = Dio(
     BaseOptions(baseUrl: Constants.baseUrl),
-  )..interceptors.add(DioInterceptor());
+  );
 
   @override
   Future get(String endpoint, {Map<String, dynamic>? params}) async {

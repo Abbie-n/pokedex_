@@ -30,9 +30,11 @@ class GetPokemonsCubit extends Cubit<GetPokemonsState> {
     );
   }
 
-  Future<void> getPokemonsFromAPI() async {
-    emit(const GetPokemonsState.loading());
-
-    await getPokemonsUseCase.getPokemonsFromAPI();
+  Future<void> getPokemonsFromAPI(
+      {int currentLength = 12, bool fetchMore = false}) async {
+    await getPokemonsUseCase.getPokemonsFromAPI(
+      currentLength: currentLength,
+      fetchMore: fetchMore,
+    );
   }
 }
