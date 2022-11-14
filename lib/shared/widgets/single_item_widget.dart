@@ -14,7 +14,6 @@ class SingleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 110,
-      height: 186,
       padding: const EdgeInsets.only(bottom: 10),
       decoration: const BoxDecoration(color: Colors.white),
       alignment: Alignment.bottomCenter,
@@ -29,7 +28,6 @@ class SingleItem extends StatelessWidget {
             imageUrl:
                 pokemon.sprites?.other?.officialArtwork?.frontDefault ?? '',
             imageBuilder: (context, imageProvider) => Container(
-              height: 104,
               padding: const EdgeInsets.symmetric(horizontal: 9),
               decoration: BoxDecoration(
                 color: Helper.getContainerColor(

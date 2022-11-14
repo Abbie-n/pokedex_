@@ -27,7 +27,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_hooks: ^0.18.5+1
   cached_network_image: ^3.2.2
-  equatable: ^2.0.5
+  equatable: ^2.0.5  
 
 
 dev_dependencies:
@@ -62,3 +62,4 @@ flutter:
         - asset: assets/fonts/NotoSans-Medium.ttf
         - asset: assets/fonts/NotoSans-Regular.ttf
         - asset: assets/fonts/NotoSans-Light.ttf
+
