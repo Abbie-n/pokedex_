@@ -16,14 +16,9 @@ import 'package:pokedex/shared/extensions/int_extension.dart';
 import 'widget/vitals_widget.dart';
 
 class PokemonDetailsScreen extends HookConsumerWidget {
-  const PokemonDetailsScreen({
-    super.key,
-    required this.pokemon,
-    this.isFave = false,
-  });
+  const PokemonDetailsScreen({super.key, required this.pokemon});
 
   final PokemonDetails pokemon;
-  final bool isFave;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +26,7 @@ class PokemonDetailsScreen extends HookConsumerWidget {
     final removeFavouriteCubit = ref.watch(removeFavouriteCubitProvider);
     final getFavouritesCubit = ref.watch(getFavouritesCubitProvider);
 
-    final isFave = useState(this.isFave);
+    final isFave = useState(false);
 
     void favouriteCheck() async {
       isFave.value = await getFavouritesCubit.isFavourite(pokemon);

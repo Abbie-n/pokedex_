@@ -42,7 +42,7 @@ class PokemonsGridViewListScreen extends HookConsumerWidget {
     });
 
     return BlocBuilder<GetPokemonsCubit, GetPokemonsState>(
-      bloc: cubit,
+      bloc: cubit..call(),
       builder: (context, state) => state.maybeWhen(
         loading: () => const Center(
           child: Padding(

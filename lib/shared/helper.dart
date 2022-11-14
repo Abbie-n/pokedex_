@@ -23,7 +23,8 @@ class Helper {
       (weight / pow(height, 2)).toStringAsFixed(2);
 
   static String getAvgPower(List<Stats> stats) =>
-      (stats.fold(0, (prev, e) => e.baseStat! + prev) / 6).toStringAsFixed(2);
+      (stats.fold(0, (int prev, e) => e.baseStat! + prev) / 6)
+          .toStringAsFixed(2);
 
   static double getProgress(num stat) => stat / 100;
 

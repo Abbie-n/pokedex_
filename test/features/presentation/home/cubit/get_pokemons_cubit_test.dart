@@ -47,7 +47,7 @@ void main() {
 
         cubit.getPokemonsFromAPI();
       },
-      expect: () => [const GetPokemonsState.loading()],
+      expect: () => [],
     );
 
     blocTest<GetPokemonsCubit, GetPokemonsState>(
@@ -72,7 +72,7 @@ void main() {
         return getPokemonsCubit;
       },
       act: (cubit) => cubit.getPokemonsFromAPI(),
-      expect: () => [const GetPokemonsState.loading()],
+      expect: () => [],
     );
   });
 }
