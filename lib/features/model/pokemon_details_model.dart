@@ -1,9 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pokemon_details_model.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
-class PokemonDetails {
+@JsonSerializable(
+  fieldRename: FieldRename.snake,
+)
+class PokemonDetails extends Equatable {
   final List<Abilities>? abilities;
   final int? baseExperience;
   final int? height;
@@ -15,7 +18,6 @@ class PokemonDetails {
   final Ability? species;
   final Sprites? sprites;
   final List<Stats>? stats;
-
   final List<Types>? types;
   final int? weight;
 
@@ -39,10 +41,27 @@ class PokemonDetails {
       _$PokemonDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$PokemonDetailsToJson(this);
+
+  @override
+  List<Object?> get props => [
+        abilities,
+        baseExperience,
+        height,
+        id,
+        isDefault,
+        locationAreaEncounters,
+        name,
+        order,
+        species,
+        sprites,
+        stats,
+        types,
+        weight,
+      ];
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Abilities {
+class Abilities extends Equatable {
   final Ability? ability;
   final bool? isHidden;
   final int? slot;
@@ -53,10 +72,13 @@ class Abilities {
       _$AbilitiesFromJson(json);
 
   Map<String, dynamic> toJson() => _$AbilitiesToJson(this);
+
+  @override
+  List<Object?> get props => [ability, isHidden, slot];
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Ability {
+class Ability extends Equatable {
   final String? name;
   final String? url;
 
@@ -66,10 +88,13 @@ class Ability {
       _$AbilityFromJson(json);
 
   Map<String, dynamic> toJson() => _$AbilityToJson(this);
+
+  @override
+  List<Object?> get props => [name, url];
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Sprites {
+class Sprites extends Equatable {
   final Other? other;
 
   const Sprites({this.other});
@@ -78,10 +103,13 @@ class Sprites {
       _$SpritesFromJson(json);
 
   Map<String, dynamic> toJson() => _$SpritesToJson(this);
+
+  @override
+  List<Object?> get props => [other];
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Other {
+class Other extends Equatable {
   final OfficialArtwork? officialArtwork;
 
   const Other({this.officialArtwork});
@@ -99,10 +127,13 @@ class Other {
           : null,
     );
   }
+
+  @override
+  List<Object?> get props => [officialArtwork];
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class OfficialArtwork {
+class OfficialArtwork extends Equatable {
   final String? frontDefault;
 
   const OfficialArtwork({this.frontDefault});
@@ -111,10 +142,13 @@ class OfficialArtwork {
       _$OfficialArtworkFromJson(json);
 
   Map<String, dynamic> toJson() => _$OfficialArtworkToJson(this);
+
+  @override
+  List<Object?> get props => [frontDefault];
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Types {
+class Types extends Equatable {
   final int? slot;
   final Ability? type;
 
@@ -123,17 +157,23 @@ class Types {
   factory Types.fromJson(Map<String, dynamic> json) => _$TypesFromJson(json);
 
   Map<String, dynamic> toJson() => _$TypesToJson(this);
+
+  @override
+  List<Object?> get props => [slot, type];
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class Stats {
-  int? baseStat;
-  int? effort;
-  Ability? stat;
+class Stats extends Equatable {
+  final int? baseStat;
+  final int? effort;
+  final Ability? stat;
 
-  Stats({this.baseStat, this.effort, this.stat});
+  const Stats({this.baseStat, this.effort, this.stat});
 
   factory Stats.fromJson(Map<String, dynamic> json) => _$StatsFromJson(json);
 
   Map<String, dynamic> toJson() => _$StatsToJson(this);
+
+  @override
+  List<Object?> get props => [baseStat, effort, stat];
 }

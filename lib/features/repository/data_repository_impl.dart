@@ -73,7 +73,6 @@ class DataRepositoryImpl implements DataRepository {
       await offlineClient.setString(cachedPokemonsKey, jsonEncode(pokemons));
     } catch (e) {
       logDebug(e);
-      return pokemons;
     }
   }
 
