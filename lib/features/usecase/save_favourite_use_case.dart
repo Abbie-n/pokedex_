@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pokedex/core/model/data.dart';
 import 'package:pokedex/core/services/api/api_exception.dart';
 import 'package:pokedex/features/model/pokemon_details_model.dart';
-import 'package:pokedex/features/repository/data_repository_impl.dart';
+import 'package:pokedex/features/repository/data_repository.dart';
 
 @lazySingleton
 class SaveFavouriteUseCase {

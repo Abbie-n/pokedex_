@@ -14,6 +14,8 @@ class PokemonDetails {
   final int? order;
   final Ability? species;
   final Sprites? sprites;
+  final List<Stats>? stats;
+
   final List<Types>? types;
   final int? weight;
 
@@ -28,6 +30,7 @@ class PokemonDetails {
     this.order,
     this.species,
     this.sprites,
+    this.stats,
     this.types,
     this.weight,
   });
@@ -83,9 +86,19 @@ class Other {
 
   const Other({this.officialArtwork});
 
-  factory Other.fromJson(Map<String, dynamic> json) => _$OtherFromJson(json);
+  Map<String, dynamic> toJson() {
+    return {
+      'official-artwork': officialArtwork?.toJson(),
+    };
+  }
 
-  Map<String, dynamic> toJson() => _$OtherToJson(this);
+  factory Other.fromJson(Map<String, dynamic> map) {
+    return Other(
+      officialArtwork: map['official-artwork'] != null
+          ? OfficialArtwork.fromJson(map['official-artwork'])
+          : null,
+    );
+  }
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
@@ -110,4 +123,17 @@ class Types {
   factory Types.fromJson(Map<String, dynamic> json) => _$TypesFromJson(json);
 
   Map<String, dynamic> toJson() => _$TypesToJson(this);
+}
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class Stats {
+  int? baseStat;
+  int? effort;
+  Ability? stat;
+
+  Stats({this.baseStat, this.effort, this.stat});
+
+  factory Stats.fromJson(Map<String, dynamic> json) => _$StatsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$StatsToJson(this);
 }

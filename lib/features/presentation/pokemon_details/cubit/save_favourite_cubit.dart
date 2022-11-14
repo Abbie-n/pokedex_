@@ -5,7 +5,7 @@ import 'package:pokedex/features/presentation/pokemon_details/cubit/save_favouri
 import 'package:pokedex/features/usecase/save_favourite_use_case.dart';
 import 'package:pokedex/providers.dart';
 
-final aveFavouriteCubitProvider = cubitAutoDispose<SaveFavouriteCubit>(
+final saveFavouriteCubitProvider = cubitAutoDispose<SaveFavouriteCubit>(
   (ref) => SaveFavouriteCubit(
     SaveFavouriteUseCase(ref.read(dataRepositoryProvider)),
   ),

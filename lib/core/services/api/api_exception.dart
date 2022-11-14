@@ -29,3 +29,8 @@ class NetworkException extends ApiException {
 class NullException extends ApiException {
   NullException([String? message]) : super(message ?? 'No data found');
 }
+
+class EmptyFavouritesException extends ApiException {
+  EmptyFavouritesException([String? message])
+      : super(message ?? 'You have no favourites at this time.');
+}

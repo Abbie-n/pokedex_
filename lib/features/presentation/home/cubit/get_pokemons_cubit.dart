@@ -19,7 +19,7 @@ class GetPokemonsCubit extends Cubit<GetPokemonsState> {
   Future<void> call() async {
     emit(const GetPokemonsState.loading());
 
-    final result = await getPokemonsUseCase();
+    final result = await getPokemonsUseCase.getCachedPokemons();
 
     result.maybeWhen(
       success: (data) async => emit(GetPokemonsState.finished(data: data)),
@@ -28,5 +28,11 @@ class GetPokemonsCubit extends Cubit<GetPokemonsState> {
       )),
       orElse: () => null,
     );
+  }
+
+  Future<void> getPokemonsFromAPI() async {
+    emit(const GetPokemonsState.loading());
+
+    await getPokemonsUseCase.getPokemonsFromAPI();
   }
 }
