@@ -5,14 +5,14 @@ import 'package:pokedex/features/model/pokemon_details_model.dart';
 import 'package:pokedex/features/repository/data_repository_impl.dart';
 
 @lazySingleton
-class SaveFavouritesUseCase {
+class SaveFavouriteUseCase {
   final DataRepository repository;
 
-  SaveFavouritesUseCase(this.repository);
+  SaveFavouriteUseCase(this.repository);
 
   Future<Data<bool>> call(PokemonDetails pokemon) async {
     try {
-      final result = await repository.saveFavourites(pokemon);
+      final result = await repository.saveFavourite(pokemon);
 
       if (!result) {
         return Data.failure(GenericException());

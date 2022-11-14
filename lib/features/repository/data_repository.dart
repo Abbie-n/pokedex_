@@ -96,7 +96,7 @@ class DataRepositoryImpl implements DataRepository {
   }
 
   @override
-  Future<bool> saveFavourites(PokemonDetails pokemon) async {
+  Future<bool> saveFavourite(PokemonDetails pokemon) async {
     List<PokemonDetails> pokemons = [];
 
     // gets persisted favourites
