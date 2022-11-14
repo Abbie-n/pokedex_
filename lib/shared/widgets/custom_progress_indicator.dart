@@ -16,7 +16,6 @@ class CustomProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    const radius = Radius.circular(30);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),

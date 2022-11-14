@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pokedex/features/home/presentation/widget/tab_header.dart';
+import 'package:pokedex/features/presentation/home/pokemons_grid_list_screen.dart';
+import 'package:pokedex/features/presentation/home/widget/tab_header.dart';
 import 'package:pokedex/shared/shared.dart';
-import 'package:pokedex/shared/widgets/custom_gridview.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,17 +24,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const YMargin(2),
           const Tabheader(),
-          Expanded(
-            child: CustomGridView(
-              children: List.generate(
-                9,
-                (index) => GestureDetector(
-                  onTap: () => context.router.push(const SingleViewScreen()),
-                  child: const SingleItem(),
-                ),
-              ),
-            ),
-          ),
+          const Expanded(child: PokemonsGridViewListScreen()),
         ],
       ),
     );

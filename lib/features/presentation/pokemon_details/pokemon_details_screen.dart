@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pokedex/features/pokemons/single_view/presentation/widget/stats_list.dart';
+import 'package:pokedex/features/presentation/pokemon_details/widget/stats_list.dart';
 import 'package:pokedex/shared/shared.dart';
 
 import 'widget/vitals_widget.dart';
 
-class SingleViewScreen extends StatelessWidget {
-  const SingleViewScreen({super.key});
+class PokemonDetailsScreen extends StatelessWidget {
+  const PokemonDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -45,3 +45,6 @@ app.*.map.json
 
 # Generated files
 *.gr.dart
+*.config.dart
+*.freezed.dart
+*.g.dart

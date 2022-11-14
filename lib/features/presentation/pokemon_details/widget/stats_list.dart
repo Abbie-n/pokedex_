@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/features/pokemons/single_view/presentation/widget/base_stats.dart';
+import 'package:pokedex/features/presentation/pokemon_details/widget/base_stats.dart';
 
 class StatsList extends StatelessWidget {
   const StatsList({super.key});
