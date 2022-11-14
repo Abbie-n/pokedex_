@@ -73,7 +73,7 @@ class PokemonDetailsScreen extends HookConsumerWidget {
       ),
       child: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
+          SliverAppBar.medium(
             pinned: true,
             floating: true,
             snap: true,
@@ -95,153 +95,144 @@ class PokemonDetailsScreen extends HookConsumerWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: Column(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: 300,
-                        padding: const EdgeInsets.fromLTRB(0, 100, 0, 14),
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          children: [
-                            const Expanded(
-                              child: Divider(
-                                color: AppColors.scaffoldBg,
-                                thickness: 2,
-                              ),
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 300,
+                      padding: const EdgeInsets.fromLTRB(0, 100, 0, 14),
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        children: [
+                          const Expanded(
+                            child: Divider(
+                              color: AppColors.scaffoldBg,
+                              thickness: 2,
                             ),
-                            Expanded(
-                              flex: 6,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
+                          ),
+                          Expanded(
+                            flex: 6,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      TextWidget(
+                                        pokemon.name?.capitalize,
+                                        textColor: Colors.black,
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      TextWidget(
+                                        Helper.concatenateString(
+                                            pokemon.types!),
+                                        textColor: AppColors.darkText,
+                                      ),
+                                      const Spacer(),
+                                      if (pokemon.types != null &&
+                                          pokemon.types!.isNotEmpty)
                                         TextWidget(
-                                          pokemon.name?.capitalize,
-                                          textColor: Colors.black,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                        TextWidget(
-                                          Helper.concatenateString(
-                                              pokemon.types!),
+                                          '${pokemon.id?.serialize}',
                                           textColor: AppColors.darkText,
                                         ),
-                                        const Spacer(),
-                                        if (pokemon.types != null &&
-                                            pokemon.types!.isNotEmpty)
-                                          TextWidget(
-                                            '${pokemon.id?.serialize}',
-                                            textColor: AppColors.darkText,
-                                          ),
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: CachedNetworkImage(
-                                        placeholder: (context, url) =>
-                                            const Center(
-                                          child:
-                                              CircularLoadingWidget(height: 50),
-                                        ),
-                                        errorWidget: (context, url, _) =>
-                                            const SizedBox.shrink(),
-                                        imageUrl: pokemon
-                                                .sprites
-                                                ?.other
-                                                ?.officialArtwork
-                                                ?.frontDefault ??
-                                            '',
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          height: 125,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 9),
-                                          child: Image.network(
-                                            pokemon.sprites!.other!
-                                                .officialArtwork!.frontDefault!,
-                                          ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: CachedNetworkImage(
+                                      placeholder: (context, url) =>
+                                          const Center(
+                                        child:
+                                            CircularLoadingWidget(height: 50),
+                                      ),
+                                      errorWidget: (context, url, _) =>
+                                          const SizedBox.shrink(),
+                                      imageUrl: pokemon.sprites?.other
+                                              ?.officialArtwork?.frontDefault ??
+                                          '',
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        height: 125,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 9),
+                                        child: Image.network(
+                                          pokemon.sprites!.other!
+                                              .officialArtwork!.frontDefault!,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        height: 78,
-                        padding: const EdgeInsets.all(16),
-                        decoration: const BoxDecoration(color: Colors.white),
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            VitalsWidget(
-                              value: '${pokemon.height}',
-                              vitalsName: 'Height',
-                            ),
-                            VitalsWidget(
-                              value: '${pokemon.weight}',
-                              vitalsName: 'Weight',
-                            ),
-                            VitalsWidget(
-                              value: Helper.getBMI(
-                                  pokemon.weight!, pokemon.height!),
-                              vitalsName: 'BMI',
-                            )
-                          ],
-                        ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: const BoxDecoration(color: Colors.white),
+                      alignment: Alignment.topLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          VitalsWidget(
+                            value: '${pokemon.height}',
+                            vitalsName: 'Height',
+                          ),
+                          VitalsWidget(
+                            value: '${pokemon.weight}',
+                            vitalsName: 'Weight',
+                          ),
+                          VitalsWidget(
+                            value:
+                                Helper.getBMI(pokemon.weight!, pokemon.height!),
+                            vitalsName: 'BMI',
+                          )
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-          //3
           SliverFillRemaining(
-            child: Column(
-              children: [
-                const YMargin(8),
-                Expanded(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 16),
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const TextWidget(
-                          'Base stats',
-                          textColor: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        const YMargin(12),
-                        const Divider(
-                          color: AppColors.scaffoldBg,
-                          height: 1,
-                        ),
-                        const YMargin(16),
-                        StatsList(pokemon)
-                      ],
+            hasScrollBody: true,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              margin: const EdgeInsets.only(top: 8),
+              decoration: const BoxDecoration(color: Colors.white),
+              child: SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TextWidget(
+                      'Base stats',
+                      textColor: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ),
+                    const YMargin(12),
+                    const Divider(
+                      color: AppColors.scaffoldBg,
+                      height: 1,
+                    ),
+                    const YMargin(16),
+                    StatsList(pokemon)
+                  ],
                 ),
-              ],
+              ),
             ),
           )
         ],
