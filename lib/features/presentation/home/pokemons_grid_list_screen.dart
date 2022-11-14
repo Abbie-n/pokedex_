@@ -16,6 +16,25 @@ class PokemonsGridViewListScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cubit = ref.watch(getPokemonsCubitProvider);
+    final scrollController = useScrollController();
+    final loading = useState(false);
+
+    scrollController.addListener(() async {
+      // nextPageTrigger will have a value equivalent to 80% of the list size.
+      var nextPageTrigger = 0.8 * scrollController.position.maxScrollExtent;
+
+      // fetches new data when user scrolls to bottom of the screen
+      if (scrollController.position.pixels > nextPageTrigger &&
+          loading.value == false) {
+        loading.value = true;
+        await cubit.getPokemonsFromAPI(
+            currentLength: cubit.state
+                .maybeWhen(finished: (data) => data.length, orElse: () => 0),
+            fetchMore: true);
+        await cubit.call();
+        loading.value = false;
+      }
+    });
 
     useEffect(() {
       cubit.call();
@@ -41,17 +60,27 @@ class PokemonsGridViewListScreen extends HookConsumerWidget {
             }
 
             await cubit.getPokemonsFromAPI();
-            cubit.call();
+            await cubit.call();
           },
-          child: CustomGridView(
-            children: List.generate(
-              data.length,
-              (index) => GestureDetector(
-                onTap: () => context.router
-                    .push(PokemonDetailsScreen(pokemon: data[index])),
-                child: SingleItem(pokemon: data[index]),
+          child: Column(
+            children: [
+              Expanded(
+                child: CustomGridView(
+                  scrollController: scrollController,
+                  children: List.generate(
+                    data.length,
+                    (index) {
+                      return GestureDetector(
+                        onTap: () => context.router
+                            .push(PokemonDetailsScreen(pokemon: data[index])),
+                        child: SingleItem(pokemon: data[index]),
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
+              if (loading.value) const CircularLoadingWidget(height: 50)
+            ],
           ),
         ),
         error: (message) => Center(

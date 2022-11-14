@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomGridView extends StatelessWidget {
-  const CustomGridView({super.key, required this.children});
+  const CustomGridView({
+    super.key,
+    required this.children,
+    this.scrollController,
+  });
+
   final List<Widget> children;
+  final ScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +18,7 @@ class CustomGridView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       margin: const EdgeInsets.symmetric(vertical: 16),
       child: GridView.count(
+        controller: scrollController,
         padding: EdgeInsets.zero,
         scrollDirection: Axis.vertical,
         mainAxisSpacing: 12,
