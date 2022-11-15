@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
@@ -43,6 +44,9 @@ class DataRepositoryImpl implements DataRepository {
   @override
   Future getPokemons({int currentLength = 12, bool fetchMore = false}) async {
     List<PokemonDetails> pokemons = [];
+    final Completer<List<PokemonDetails>> completer =
+        Completer<List<PokemonDetails>>();
+
     int limit = 12;
 
     try {
@@ -54,7 +58,7 @@ class DataRepositoryImpl implements DataRepository {
       final response = await apiService.get('/', params: {'limit': limit});
 
       if (response == null || response.runtimeType == int) {
-        return pokemons;
+        return completer.future;
       }
 
       // parses data returned
@@ -66,7 +70,7 @@ class DataRepositoryImpl implements DataRepository {
           final details = await apiService.get('/${p.name}');
 
           if (details == null || details.runtimeType == int) {
-            return pokemons;
+            return completer.future;
           }
 
           final data = PokemonDetails.fromJson(details);
@@ -74,6 +78,8 @@ class DataRepositoryImpl implements DataRepository {
           pokemons.add(data);
         }
       }
+
+      completer.complete(pokemons);
 
       await offlineClient.setString(cachedPokemonsKey, jsonEncode(pokemons));
     } catch (e) {

@@ -25,8 +25,10 @@ class PokedexApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pokemonsCubit = ref.read(getPokemonsCubitProvider);
 
+    void init() async => await pokemonsCubit.getPokemonsFromAPI();
+
     useEffect(() {
-      pokemonsCubit.getPokemonsFromAPI();
+      init();
       return null;
     }, []);
 

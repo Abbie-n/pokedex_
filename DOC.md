@@ -17,13 +17,6 @@ flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-** Side note
-Application was only properly tested on the iPhone 14 PRO as at 14th, November 2022.
-
-Recommended device
-
-- iPhone 14 PRO or similar specs
-
 ## Run Tests
 
 Kindly run this command in the terminal:
