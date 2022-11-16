@@ -42,7 +42,8 @@ class DataRepositoryImpl implements DataRepository {
   }
 
   @override
-  Future getPokemons({int currentLength = 12, bool fetchMore = false}) async {
+  Future<List<PokemonDetails>> getPokemons(
+      {int currentLength = 12, bool fetchMore = false}) async {
     List<PokemonDetails> pokemons = [];
     final Completer<List<PokemonDetails>> completer =
         Completer<List<PokemonDetails>>();
@@ -82,8 +83,10 @@ class DataRepositoryImpl implements DataRepository {
       completer.complete(pokemons);
 
       await offlineClient.setString(cachedPokemonsKey, jsonEncode(pokemons));
+      return pokemons;
     } catch (e) {
       logDebug(e);
+      return pokemons;
     }
   }
 
@@ -95,7 +98,8 @@ class DataRepositoryImpl implements DataRepository {
     final dataString = await offlineClient.getString(cachedPokemonsKey);
 
     if (dataString == null) {
-      return pokemons;
+      final newPokemons = await getPokemons();
+      return newPokemons;
     }
 
     // updates list with favourites

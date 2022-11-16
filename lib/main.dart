@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 import 'package:pokedex/core/config/injection.dart';
-import 'package:pokedex/features/presentation/home/cubit/get_pokemons_cubit.dart';
 import 'package:pokedex/routes/router.gr.dart';
 import 'package:pokedex/shared/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await serviceLocator();
   Loggy.initLoggy();
 
   runApp(ProviderScope(child: PokedexApp()));
 }
 
-class PokedexApp extends HookConsumerWidget {
+class PokedexApp extends StatelessWidget {
   PokedexApp({super.key});
 
   final _appRouter = AppRouter();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final pokemonsCubit = ref.read(getPokemonsCubitProvider);
-
-    void init() async => await pokemonsCubit.getPokemonsFromAPI();
-
-    useEffect(() {
-      init();
-      return null;
-    }, []);
-
+  Widget build(BuildContext context) {
     return StyledToast(
       locale: const Locale('en', 'US'),
       textStyle: const TextStyle(fontSize: 16.0, color: Colors.white),
